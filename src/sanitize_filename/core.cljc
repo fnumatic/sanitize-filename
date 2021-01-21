@@ -18,23 +18,23 @@
 (defn- filter-windows-reserved-names [filename]
   (if (re-matches WINDOWS_RESERVED_NAMES filename)
     FALLBACK_FILENAME
-    filename
-    )
-  )
+    filename))
+    
+  
 
 (defn- filter-blank [filename]
   (if (s/blank? filename)
     FALLBACK_FILENAME
-    filename
-    )
-  )
+    filename))
+    
+  
 
 (defn- filter-dot [filename]
   (if (.startsWith filename ".")
     (str FALLBACK_FILENAME filename)
-    filename
-    )
-  )
+    filename))
+    
+  
 
 (defn- filter-invalid-trailing-chars [filename]
   (s/replace filename
@@ -46,32 +46,39 @@
       filter-windows-reserved-names
       filter-blank
       filter-dot
-      filter-invalid-trailing-chars)
-  )
+      filter-invalid-trailing-chars))
+  
 
-(defn- -sanitize [filename]
+(defn- -sanitize [filename replacement]
   (-> filename
       ;(s/replace CHARACTER_FILTER ""))
       ; NOTE: different with zaru
       ; replace with $, to indicate that there was a special character
-      (s/replace CHARACTER_FILTER (s/re-quote-replacement "$")))
-  )
+      (s/replace CHARACTER_FILTER (s/re-quote-replacement replacement))))
+  
 
 (defn- truncate [filename]
   (if (> (.length filename) 254)
     (.substring filename 0 254)
-    filename)
-  )
+    filename))
+  
 
 ;; exported function
-(defn sanitize [filename]
-  (-> filename
-      normalize
-      -sanitize
-      -filter
-      truncate)
-  )
+(defn sanitize 
+  ([filename]
+   (sanitize filename "$"))
+  
+  ([filename replacement]
+   (-> filename
+       normalize
+       (-sanitize replacement)
+       -filter
+       truncate)))
 
-;(defn -main []
-;  should print "ab我是c.zip"
-;  (println (sanitize "/a/b/  我是c.zip")))
+
+(comment
+  ;;"$a$b$我是c.zip"
+  (sanitize "/a/b/  我是c.zip")
+  ;;"_a_b_我是c.zip" 
+  (sanitize "/a/b/  我是c.zip" "_")  
+ ,)
