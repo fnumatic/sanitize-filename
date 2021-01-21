@@ -1,0 +1,9 @@
+;; :description "Filename sanitization for Clojure"
+;; :url "https://github.com/liusong1111/sanitize-filename"
+;; :license {:name "MIT"
+;;           :url  "http://opensource.org/licenses/MIT"}
+
+{:deps  {org.clojure/clojure {:mvn/version "1.10.1"
+                              :scope "provided"}}
+ 
+ :paths ["src"]}
