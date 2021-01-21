@@ -1,6 +1,6 @@
 (ns sanitize-filename.core-test
   (:require [sanitize-filename.core :as sut]
-            [clojure.test :refer :all]
+            [clojure.test :refer [deftest is testing]]
             [clojure.string :as str]))
 
 (deftest sanitize-test
