@@ -1,6 +1,6 @@
 # sanitize-filename
 
-Filename sanitization for Clojure.
+Filename sanitization for Clojure and ClojureScript.
 This is useful when you generate filenames for downloads from user input
 
 Port of ruby's zaru library:
@@ -9,9 +9,15 @@ https://github.com/madrobby/zaru
 
 ## Installation
 Add the following to your project.clj :dependencies:
-
+### Leiningen
     [sanitize-filename "0.1.0"]
 
+### Clojure CLI
+    sanitize-filename/sanitize-filename {:mvn/version "0.1.0"}
+
+### Clojure CLI / Repo
+    fnumatic/sanitize-filename {:git/url "https://github.com/fnumatic/sanitize-filename.git"
+                                :sha     "42dc97cbcca1e24bc4ebe6f2d9d789d64bb93365"}    
 ## Usage
 
     (require '[sanitize-filename.core :as sf])
