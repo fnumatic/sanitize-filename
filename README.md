@@ -1,5 +1,7 @@
 # sanitize-filename
 
+[![Clojars Project](https://img.shields.io/clojars/v/sanitize-filename.svg)](https://clojars.org/sanitize-filename)
+
 Filename sanitization for Clojure and ClojureScript.
 This is useful when you generate filenames for downloads from user input
 
